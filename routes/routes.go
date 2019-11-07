@@ -8,5 +8,5 @@ import (
 
 func LoadRoutes() {
 	http.HandleFunc("/", controllers.Index)
-	http.ListenAndServe(":8000", nil)
+	http.HandleFunc("/new", controllers.New)
 }
