@@ -1,17 +1,12 @@
 package main
 
 import (
-	"html/template"
 	"net/http"
-	"github.com/mayconb2/web-application-go/models"
+
+	"github.com/mayconb2/web-application-go/routes"
 )
 
-var temp = template.Must(template.ParseGlob("templates/*.html")){
-	allProducts := models.
-	
-}
-
 func main() {
-	http.HandleFunc("/", index)
+	routes.LoadRoutes()
 	http.ListenAndServe(":8000", nil)
 }

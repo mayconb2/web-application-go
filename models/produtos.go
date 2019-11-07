@@ -10,7 +10,7 @@ type Produto struct {
 	Quantidade int
 }
 
-func selectAllProdutos() []Produto {
+func SelectAllProdutos() []Produto {
 
 	db := db.ConectaDb()
 	selectTodosOsProdutos, err := db.Query("select * from produtos")
@@ -20,7 +20,7 @@ func selectAllProdutos() []Produto {
 	p := Produto{}
 	produtos := []Produto{}
 
-	for SelectTodosOsProdutos.Next() {
+	for selectTodosOsProdutos.Next() {
 
 		var id, quantidade int
 		var nome, descricao string
