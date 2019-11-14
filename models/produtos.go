@@ -3,7 +3,7 @@ package models
 import "github.com/mayconb2/web-application-go/db"
 
 type Produto struct {
-	id         int
+	Id         int
 	Nome       string
 	Descricao  string
 	Preco      float64
@@ -31,6 +31,7 @@ func SelectAllProdutos() []Produto {
 			panic(err.Error())
 		}
 
+		p.Id = id
 		p.Nome = nome
 		p.Descricao = descricao
 		p.Preco = preco
@@ -56,5 +57,16 @@ func CreateNewProduct(nome, descricao string, preco float64, quantidade int) {
 
 	insertDataIntoDB.Exec(nome, descricao, preco, quantidade)
 
+	defer db.Close()
+}
+
+func DeleteProduct(idProduct string) {
+	db := db.ConectaDb()
+
+	deleteProduct, err := db.Prepare("delete from produtos where id = ?")
+	if err != nil {
+		panic(err.Error())
+	}
+	deleteProduct.Exec(idProduct)
 	defer db.Close()
 }
