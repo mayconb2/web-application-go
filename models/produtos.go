@@ -44,3 +44,17 @@ func SelectAllProdutos() []Produto {
 	return produtos
 
 }
+
+func CreateNewProduct(nome, descricao string, preco float64, quantidade int) {
+
+	db := db.ConectaDb()
+
+	insertDataIntoDB, err := db.Prepare("insert into produtos(nome, descricao, preco, quantidade) values(?, ?, ?, ?)")
+	if err != nil {
+		panic(err.Error())
+	}
+
+	insertDataIntoDB.Exec(nome, descricao, preco, quantidade)
+
+	defer db.Close()
+}
